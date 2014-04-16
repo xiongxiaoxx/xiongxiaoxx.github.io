@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>XiongXiao's Blog</title>
+  <meta name="author" content="XiongXiao">
+
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="http://xiongxiaoxx.github.io/favicon.png" rel="icon">
+  <link href="http://xiongxiaoxx.github.io/theme/css/main.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="http://xiongxiaoxx.github.io/theme/js/modernizr-2.0.js"></script>
+  <script src="http://xiongxiaoxx.github.io/theme/js/ender.js"></script>
+  <script src="http://xiongxiaoxx.github.io/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="http://xiongxiaoxx.github.io/">XiongXiao's Blog</a></h1>
+    <h2>菜鸟要起飞</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+</ul>
+
+
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:xiongxiaoxx.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<ul class="main-navigation">
+    <li><a href="http://xiongxiaoxx.github.io/">Home Page</a></li>
+    <li><a href="/archives.html">Archives</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div class="blog-index">
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://xiongxiaoxx.github.io/blog/2014/04/15/ros_multiplemachines/">[ROS]ROS PC间通讯</a>
+      </h1>
+      <p class="meta"><time datetime="2014-04-15T17:00:00" pubdate>二 15 四月 2014</time></p>
+</header>
+
+  <div class="entry-content"><p>Kinect输出的数据包括640*480的rgb颜色数据以及depth深度数据，计划采用的实验平台是Xilinx提供的<a href="http://www.digilentinc.com/Products/Detail.cfm?NavPath=2,400,1198&amp;Prod=ZYBO">Zybo</a>平台，由于Kinect的数据量大，加上3D建模的算法较为复杂，想要在Zybo平台上实现所有的功能恐怕是心有余而力不足,所以就需要在Zybo上做一些相对简单的处理，再将数据发送至PC端实现一些较为复杂的算法和图形显示功能。</p>
+<p>由于Zybo上的ROS暂时还未实现，暂且先用两台PC做实验。</p>
+<p>在多台机器上部署ROS并不复杂，记住以下几点</p>
+<ul>
+<li>只能有一个主控制器<code>ROS master</code>，选择一台机器运行</li>
+<li>所有的机器必须配置为使用相同的主控制器，通过设置环境变量<code>ROS_MASTER_URI</code>实现</li>
+<li>所有的机器端口之间都必须有完整的双向连接</li>
+<li>每台机器都必须要有一个自己的名字，其他的机器通过名字解析
+具体设置可以参考<a href="http://wiki.ros.org/ROS/NetworkSetup">ROS/NetworkSetup</a></li>
+</ul>
+<h2>实验步骤</h2>
+<p>这里的<code>MASTER_IP</code>和<code>SLAVE_IP</code>分别代表两台机器的IP地址,请自行更改</p>
+<p>1.在主机运行</p>
+<div class="highlight"><pre><span class="nv">$ </span><span class="nb">export </span><span class="nv">ROS_MASTER_URI</span><span class="o">=</span>http://MASTER_IP:11311
+<span class="nv">$ </span><span class="nb">export </span><span class="nv">ROS_IP</span><span class="o">=</span>MASTER_IP
+<span class="nv">$ </span>roscore
+<span class="nv">$ </span>rosrun rospy_tutorials listener.py ...</pre></div></div>
+  <footer>
+    <a rel="full-article" href="http://xiongxiaoxx.github.io/blog/2014/04/15/ros_multiplemachines/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://xiongxiaoxx.github.io/blog/2014/04/01/kinect_3d/">[ROS]Kinect 3D 环境建模的尝试与改造</a>
+      </h1>
+      <p class="meta"><time datetime="2014-04-01T17:00:00" pubdate>二 01 四月 2014</time></p>
+</header>
+
+  <div class="entry-content"><p>今年团队参加了<a href="http://www.openhw.org/">openHW</a> 2014开源硬件与嵌入式大赛。计划用四旋翼飞行器搭载kinect实现室内环境的三维建模。期望的最终实现下过如下图：
+<img alt="3d_output" src="/images/3d_output.png" /></p>
+<p>去年我们团队同样参加了这个比赛，题目是<a href="http://www.openhw.org/project/index_view_2311.html">混合实时移动机器人平台</a>，实现小型轮式移动机器人室内环境的2D地图构建和导航，采用ROS（Robot Operation System）分布式架构。演示视频在<a href="http://v.youku.com/v_show/id_XNTc3MzkxODcy.html">这里</a>。</p>
+<p>虽说已经有了去年的基础，但从2D升级到3D还是面临着很多挑战。具体体现在以下几个方面：</p>
+<ul>
+<li>数据量的大幅增加，网络传输的带宽限制</li>
+<li>环境信息的特征识别、地图拼接的算法等都更加复杂</li>
+<li>飞行器的飞行状态的不稳定性</li>
+</ul></div>
+  <footer>
+    <a rel="full-article" href="http://xiongxiaoxx.github.io/blog/2014/04/01/kinect_3d/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://xiongxiaoxx.github.io/blog/2014/03/25/page1/">[Pelican] 使用Pelican搭建静态博客</a>
+      </h1>
+      <p class="meta"><time datetime="2014-03-25T22:20:00" pubdate>二 25 三月 2014</time></p>
+</header>
+
+  <div class="entry-content"><h2>为什么写博客</h2>
+<p>一方面是对自己平时工作和学习中收获的自我总结和积累，另一方面，借用知乎的一句话说就是“<strong>与世界分享你的知识</strong>”。</p>
+<h2>为什么选择<a href="http://docs.getpelican.com/en/3.3.0/">Plican</a></h2>
+<p>写博客有两种选择:</p>
+<p>一种是博客社区，中文的比如<a href="http://blog.csdn.net/">CSDN</a>，<a href="https://www.cnblogs.com/">博客园</a>等，我之前在CSDN上的博客在<a href="http://blog.csdn.net/xiongxiaoxx">这里</a>。社区中不乏很多好的文章，而且搜索起来比较方便。</p>
+<p>第二种是搭建个人的独立博客。一直以来搭建独立Blog的首选只有 <code>Wordpress</code> ，不但安装快捷简单，还有无数的插件和主题。我也学习过<code>Python</code> 和<code>Django</code>，尝试过用<code>Django</code>自己搭建一个博客，感兴趣的可以看看<a href="http://django-blog-zinnia.com/">django-blog-zinnia</a>，但最终因为相对繁杂的配置和管理放弃了。请原谅我的孤陋寡闻，我是直到三个月前才知道<a href="https://pages.github.com/">Github Pages</a> 和静态博客这个概念的。</p>
+<h3>静态Blog生成工具的好处：</h3>
+<ul>
+<li>静态，对托管空间没有要求，只要支持Web服务即可，可以直接放在Github上</li>
+<li>支持 <code>reStructuredText</code> 和 <code>Markdown</code> 语法，这种所想即所得的标记语言加上 <code>Emacs</code>的定制配置 ...</li></ul></div>
+  <footer>
+    <a rel="full-article" href="http://xiongxiaoxx.github.io/blog/2014/03/25/page1/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://xiongxiaoxx.github.io/blog/2014/03/22/rgbd_slam/">[ROS]fuerte版本的下解决rgbdslam包不兼容的问题</a>
+      </h1>
+      <p class="meta"><time datetime="2014-03-22T20:00:00" pubdate>六 22 三月 2014</time></p>
+</header>
+
+  <div class="entry-content"><p>最近学习ROS的过程中入手了kinect，一些驱动部分已经装好，对人体的骨架识别在一番折腾之后也没有问题了，唯独在对环境进行地图建模的地方一直卡住很久，由于手上没有现成的机器人，本人也是ROS新手，所以只能按照官方的教程一步一步来，具体可以参考<a href="http://www.ros.org/wiki/rgbdslam">rgbdslam Wiki</a>。下载完rgbdslam_freiburg包，也通过</p>
+<div class="highlight"><pre>rosdep update
+rosdep install rgbdslam_freiburg
+</pre></div>
+
+
+<p>安装了libg2o,但在最终编译的时候出现错误，导致编译不能通过。上ROS ANWSERS 找解决办法，发现有很多和我类似的情况，最后我找到了<a href="http://answers.ros.org/question/50585/rgbdslam-error-in-fuerte-and-electric/">这个</a></p>
+<p>其中的回答大意就是删除libg2o包，下载旧版本的g2o包，然后更改rgbdslam_freiburg包编译过程中用到的依赖。</p>
+<p>我的步骤如下</p>
+<ol>
+<li>
+<p>到<a href="http://openslam.org/g2o.html">http://openslam.org/g2o.html</a> 通过svn获取源码，阅读trunk文件夹中的README.TXT安装一些依赖之后再编译。</p>
+</li>
+<li>
+<p>在<a href="http://ros.org/wiki/g2o">http://ros.org/wiki/g2o</a>通过svn下载包，然后编译，在编译过程中会提示网址的svn证书不受信任，编译终止。通过在网上查资料 ...</p></li></ol></div>
+  <footer>
+    <a rel="full-article" href="http://xiongxiaoxx.github.io/blog/2014/03/22/rgbd_slam/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://xiongxiaoxx.github.io/blog/2014/03/20/slam/">[ROS]即时定位与地图构建(SLAM)的相关研究</a>
+      </h1>
+      <p class="meta"><time datetime="2014-03-20T20:00:00" pubdate>四 20 三月 2014</time></p>
+</header>
+
+  <div class="entry-content"><p>即时定位与地图构建（SimultaneousLocalization AndMapping）指的是机器人在自身位置不确定的条件下,在完全未知环境中创建地图,同时利用地图进行自主定位和导航。</p>
+<p>SLAM问题可以描述为:机器人在未知环境中从一个未知位置开始移动,在移动过程中根据位置估计和传感器数据进行自身定位,同时建造增量式地图。</p>
+<ul>
+<li>定位(localization)：机器人必须知道自己在环境中位置。</li>
+<li>建图(mapping)：机器人必须记录环境中特征的位置（如果知道自己的位置）</li>
+<li>SLAM：机器人在定位的同时建立环境地图。其基本原理是运过概率统计的方法，通过多特征匹配来达到定位和减少定位误差的。</li>
+</ul>
+<p><img alt="图 SLAM的基本过程" src="/images/slam_base.jpg" /></p>
+<p>移动机器人自定位与环境建模问题是紧密相关的。环境模型的准确性依赖于定位精度，而定位的实现又离不开环境模型。在未知环境中，机器人没有什么参照物，只能依靠自己并不十分准确的传感器来获取外界信息，如同一个盲人在一个陌生环境中摸索的情况。这种情况下，定位是比较困难的。有地图的定位和有定位的地图创建都是容易解决的，但无地图的定位和未解决定位的地图创建如同"鸡--蛋"问题，无从下手。已有的研究中对这类问题的解决方法可分为两类：一类利用自身携带的多种内部传感器(包括里程仪、罗盘、加速度计等)，通过多种传感信息的融合减少定位的误差，使用的融合算法多为基于卡尔曼滤波的方法。这类方法由于没有参考外部信息，在长时间的漫游后误差的积累会比较大。另一类方法在依靠内部传感器估计自身运动的同时，使用外部传感器(如激光测距仪、视觉等)感知环境，对获得的信息进行分析提取环境特征并保存 ...</p></div>
+  <footer>
+    <a rel="full-article" href="http://xiongxiaoxx.github.io/blog/2014/03/20/slam/">Read On &crarr;</a>
+  </footer>
+  		</article>
+<div class="pagination">
+
+  <br />
+</div></div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="http://xiongxiaoxx.github.io/blog/2014/04/15/ros_multiplemachines/">[ROS]ROS PC间通讯</a>
+      </li>
+      <li class="post">
+          <a href="http://xiongxiaoxx.github.io/blog/2014/04/01/kinect_3d/">[ROS]Kinect 3D 环境建模的尝试与改造</a>
+      </li>
+      <li class="post">
+          <a href="http://xiongxiaoxx.github.io/blog/2014/03/25/page1/">[Pelican] 使用Pelican搭建静态博客</a>
+      </li>
+      <li class="post">
+          <a href="http://xiongxiaoxx.github.io/blog/2014/03/22/rgbd_slam/">[ROS]fuerte版本的下解决rgbdslam包不兼容的问题</a>
+      </li>
+      <li class="post">
+          <a href="http://xiongxiaoxx.github.io/blog/2014/03/20/slam/">[ROS]即时定位与地图构建(SLAM)的相关研究</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+      
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="http://xiongxiaoxx.github.io/category/python.html">Python</a></li>
+        <li><a href="http://xiongxiaoxx.github.io/category/ros.html">ROS</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+    <a href="http://xiongxiaoxx.github.io/tag/pelican.html">pelican</a>,    <a href="http://xiongxiaoxx.github.io/tag/rgbdslam.html">rgbdslam</a>,    <a href="http://xiongxiaoxx.github.io/tag/python.html">python</a>,    <a href="http://xiongxiaoxx.github.io/tag/multiplemachines.html">MultipleMachines</a>,    <a href="http://xiongxiaoxx.github.io/tag/kinect.html">kinect</a>,    <a href="http://xiongxiaoxx.github.io/tag/slam.html">slam</a>,    <a href="http://xiongxiaoxx.github.io/tag/ros.html">ROS</a>,    <a href="http://xiongxiaoxx.github.io/tag/3d.html">3D</a>  </section>
+
+
+    <section>
+        <h1>Social</h1>
+        <ul>
+            <li><a href="#" target="_blank">You can add links in your config file</a></li>
+            <li><a href="#" target="_blank">Another social link</a></li>
+        </ul>
+    </section>
+    <section>
+        <h1>Blogroll</h1>
+        <ul>
+            <li><a href="http://getpelican.com/" target="_blank">Pelican</a></li>
+            <li><a href="http://python.org/" target="_blank">Python.org</a></li>
+            <li><a href="http://jinja.pocoo.org/" target="_blank">Jinja2</a></li>
+        </ul>
+    </section>
+
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+      Copyright &copy; 2014 - XiongXiao -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-49736352-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-49736352-1');
+    ga('send', 'pageview');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'xiongxiaoblog';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

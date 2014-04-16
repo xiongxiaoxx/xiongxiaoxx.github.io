@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>[ROS]fuerte版本的下解决rgbdslam包不兼容的问题</title>
+  <meta name="author" content="XiongXiao">
+
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="http://xiongxiaoxx.github.io/favicon.png" rel="icon">
+  <link href="http://xiongxiaoxx.github.io/theme/css/main.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="http://xiongxiaoxx.github.io/theme/js/modernizr-2.0.js"></script>
+  <script src="http://xiongxiaoxx.github.io/theme/js/ender.js"></script>
+  <script src="http://xiongxiaoxx.github.io/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="http://xiongxiaoxx.github.io/">XiongXiao's Blog</a></h1>
+    <h2>菜鸟要起飞</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+</ul>
+
+
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:xiongxiaoxx.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<ul class="main-navigation">
+    <li><a href="http://xiongxiaoxx.github.io/">Home Page</a></li>
+    <li><a href="/archives.html">Archives</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">[ROS]fuerte版本的下解决rgbdslam包不兼容的问题</h1>
+      <p class="meta"><time datetime="2014-04-04T20:00:00" pubdate>五 04 四月 2014</time></p>
+</header>
+
+  <div class="entry-content"><p>最近学习ROS的过程中入手了kinect，一些驱动部分已经装好，对人体的骨架识别在一番折腾之后也没有问题了，唯独在对环境进行地图建模的地方一直卡住很久，由于手上没有现成的机器人，本人也是ROS新手，所以只能按照官方的教程一步一步来，具体可以参考<a href="http://www.ros.org/wiki/rgbdslam">rgbdslam Wiki</a>。下载完rgbdslam_freiburg包，也通过</p>
+<div class="highlight"><pre>rosdep update
+rosdep install rgbdslam_freiburg
+</pre></div>
+
+
+<p>安装了libg2o,但在最终编译的时候出现错误，导致编译不能通过。上ROS ANWSERS 找解决办法，发现有很多和我类似的情况，最后我找到了<a href="http://answers.ros.org/question/50585/rgbdslam-error-in-fuerte-and-electric/">这个</a></p>
+<p>其中的回答大意就是删除libg2o包，下载旧版本的g2o包，然后更改rgbdslam_freiburg包编译过程中用到的依赖。</p>
+<p>我的步骤如下</p>
+<ol>
+<li>
+<p>到<a href="http://openslam.org/g2o.html">http://openslam.org/g2o.html</a> 通过svn获取源码，阅读trunk文件夹中的README.TXT安装一些依赖之后再编译。</p>
+</li>
+<li>
+<p>在<a href="http://ros.org/wiki/g2o">http://ros.org/wiki/g2o</a>通过svn下载包，然后编译，在编译过程中会提示网址的svn证书不受信任，编译终止。通过在网上查资料，更改g2o文件夹下的ＭakeFile中的SVN配置即可：
+<code>SVN_CMDLINE = svn --no-auth-cache --trust-server-cert --non-interactive --config-dir</code></p>
+</li>
+<li>
+<p>更改之后重新编译，耗时较长，大概400s，请耐心等待。</p>
+</li>
+<li>
+<p>g2o包编译成功之后，按照别人给的回答修改rgbdslam_freiburg包编译过程中用到的依赖，再次编译rgbdslam_freiburg包，成功！</p>
+</li>
+</ol></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Xiong Xiao</span>
+  </span>
+<time datetime="2014-04-04T20:00:00" pubdate>五 04 四月 2014</time>  <span class="categories">
+    <a class="category" href="http://xiongxiaoxx.github.io/tag/kinect.html">kinect</a>
+    <a class="category" href="http://xiongxiaoxx.github.io/tag/ros.html">ROS</a>
+    <a class="category" href="http://xiongxiaoxx.github.io/tag/3d.html">3D</a>
+    <a class="category" href="http://xiongxiaoxx.github.io/tag/rgbdslam.html">rgbdslam</a>
+  </span>
+</p><div class="sharing">
+</div>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="http://xiongxiaoxx.github.io/blog/2014/04/04/rgbd_slam/">[ROS]fuerte版本的下解决rgbdslam包不兼容的问题</a>
+      </li>
+      <li class="post">
+          <a href="http://xiongxiaoxx.github.io/blog/2014/04/01/kinect_3d/">[ROS]Kinect 3D 环境建模的尝试与改造</a>
+      </li>
+      <li class="post">
+          <a href="http://xiongxiaoxx.github.io/blog/2014/03/25/page1/">[Pelican] 用Pelican搭建静态博客</a>
+      </li>
+      <li class="post">
+          <a href="http://xiongxiaoxx.github.io/blog/2014/03/20/slam/">[ROS]即时定位与地图构建(SLAM)的相关研究</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+      
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="http://xiongxiaoxx.github.io/category/python.html">Python</a></li>
+        <li><a href="http://xiongxiaoxx.github.io/category/ros.html">ROS</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+    <a href="http://xiongxiaoxx.github.io/tag/pelican.html">pelican</a>,    <a href="http://xiongxiaoxx.github.io/tag/rgbdslam.html">rgbdslam</a>,    <a href="http://xiongxiaoxx.github.io/tag/python.html">python</a>,    <a href="http://xiongxiaoxx.github.io/tag/kinect.html">kinect</a>,    <a href="http://xiongxiaoxx.github.io/tag/slam.html">slam</a>,    <a href="http://xiongxiaoxx.github.io/tag/ros.html">ROS</a>,    <a href="http://xiongxiaoxx.github.io/tag/3d.html">3D</a>  </section>
+
+
+    <section>
+        <h1>Social</h1>
+        <ul>
+            <li><a href="#" target="_blank">You can add links in your config file</a></li>
+            <li><a href="#" target="_blank">Another social link</a></li>
+        </ul>
+    </section>
+    <section>
+        <h1>Blogroll</h1>
+        <ul>
+            <li><a href="http://getpelican.com/" target="_blank">Pelican</a></li>
+            <li><a href="http://python.org/" target="_blank">Python.org</a></li>
+            <li><a href="http://jinja.pocoo.org/" target="_blank">Jinja2</a></li>
+        </ul>
+    </section>
+
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+      Copyright &copy; 2014 - XiongXiao -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+	<script type="text/javascript">
+	  var disqus_shortname = 'xiongxiaoblog';
+          var disqus_identifier = '/blog/2014/04/04/rgbd_slam/';
+          var disqus_url = 'http://xiongxiaoxx.github.io/blog/2014/04/04/rgbd_slam/';
+          var disqus_title = '[ROS]fuerte版本的下解决rgbdslam包不兼容的问题';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>XiongXiao's Blog - slam</title>
+  <meta name="author" content="XiongXiao">
+
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="http://xiongxiaoxx.github.io/favicon.png" rel="icon">
+  <link href="http://xiongxiaoxx.github.io/theme/css/main.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="http://xiongxiaoxx.github.io/theme/js/modernizr-2.0.js"></script>
+  <script src="http://xiongxiaoxx.github.io/theme/js/ender.js"></script>
+  <script src="http://xiongxiaoxx.github.io/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="http://xiongxiaoxx.github.io/">XiongXiao's Blog</a></h1>
+    <h2>菜鸟要起飞</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+</ul>
+
+
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:xiongxiaoxx.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<ul class="main-navigation">
+    <li><a href="http://xiongxiaoxx.github.io/">Home Page</a></li>
+    <li><a href="/archives.html">Archives</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div class="blog-index">
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://xiongxiaoxx.github.io/blog/2014/03/20/slam/">[ROS]即时定位与地图构建(SLAM)的相关研究</a>
+      </h1>
+      <p class="meta"><time datetime="2014-03-20T20:00:00" pubdate>四 20 三月 2014</time></p>
+</header>
+
+  <div class="entry-content"><p>即时定位与地图构建（SimultaneousLocalization AndMapping）指的是机器人在自身位置不确定的条件下,在完全未知环境中创建地图,同时利用地图进行自主定位和导航。</p>
+<p>SLAM问题可以描述为:机器人在未知环境中从一个未知位置开始移动,在移动过程中根据位置估计和传感器数据进行自身定位,同时建造增量式地图。</p>
+<ul>
+<li>定位(localization)：机器人必须知道自己在环境中位置。</li>
+<li>建图(mapping)：机器人必须记录环境中特征的位置（如果知道自己的位置）</li>
+<li>SLAM：机器人在定位的同时建立环境地图。其基本原理是运过概率统计的方法，通过多特征匹配来达到定位和减少定位误差的。</li>
+</ul>
+<p><img alt="图 SLAM的基本过程" src="/images/slam_base.jpg" /></p>
+<p>移动机器人自定位与环境建模问题是紧密相关的。环境模型的准确性依赖于定位精度，而定位的实现又离不开环境模型。在未知环境中，机器人没有什么参照物，只能依靠自己并不十分准确的传感器来获取外界信息，如同一个盲人在一个陌生环境中摸索的情况。这种情况下，定位是比较困难的。有地图的定位和有定位的地图创建都是容易解决的，但无地图的定位和未解决定位的地图创建如同"鸡--蛋"问题，无从下手。已有的研究中对这类问题的解决方法可分为两类：一类利用自身携带的多种内部传感器(包括里程仪、罗盘、加速度计等)，通过多种传感信息的融合减少定位的误差，使用的融合算法多为基于卡尔曼滤波的方法。这类方法由于没有参考外部信息，在长时间的漫游后误差的积累会比较大。另一类方法在依靠内部传感器估计自身运动的同时，使用外部传感器(如激光测距仪、视觉等)感知环境，对获得的信息进行分析提取环境特征并保存 ...</p></div>
+  <footer>
+    <a rel="full-article" href="http://xiongxiaoxx.github.io/blog/2014/03/20/slam/">Read On &crarr;</a>
+  </footer>
+  		</article>
+<div class="pagination">
+
+  <br />
+</div></div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="http://xiongxiaoxx.github.io/blog/2014/03/20/slam/">[ROS]即时定位与地图构建(SLAM)的相关研究</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+      
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="http://xiongxiaoxx.github.io/category/python.html">Python</a></li>
+        <li><a href="http://xiongxiaoxx.github.io/category/ros.html">ROS</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+    <a href="http://xiongxiaoxx.github.io/tag/pelican.html">pelican</a>,    <a href="http://xiongxiaoxx.github.io/tag/rgbdslam.html">rgbdslam</a>,    <a href="http://xiongxiaoxx.github.io/tag/python.html">python</a>,    <a href="http://xiongxiaoxx.github.io/tag/multiplemachines.html">MultipleMachines</a>,    <a href="http://xiongxiaoxx.github.io/tag/kinect.html">kinect</a>,    <a href="http://xiongxiaoxx.github.io/tag/slam.html">slam</a>,    <a href="http://xiongxiaoxx.github.io/tag/ros.html">ROS</a>,    <a href="http://xiongxiaoxx.github.io/tag/3d.html">3D</a>  </section>
+
+
+    <section>
+        <h1>Social</h1>
+        <ul>
+            <li><a href="#" target="_blank">You can add links in your config file</a></li>
+            <li><a href="#" target="_blank">Another social link</a></li>
+        </ul>
+    </section>
+    <section>
+        <h1>Blogroll</h1>
+        <ul>
+            <li><a href="http://getpelican.com/" target="_blank">Pelican</a></li>
+            <li><a href="http://python.org/" target="_blank">Python.org</a></li>
+            <li><a href="http://jinja.pocoo.org/" target="_blank">Jinja2</a></li>
+        </ul>
+    </section>
+
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+      Copyright &copy; 2014 - XiongXiao -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-49736352-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-49736352-1');
+    ga('send', 'pageview');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'xiongxiaoblog';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>
