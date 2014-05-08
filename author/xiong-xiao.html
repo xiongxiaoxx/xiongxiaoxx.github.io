@@ -53,6 +53,36 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="http://xiongxiaoxx.github.io/blog/2014/05/08/learn_html_1/">[HTML] Head First HTML & CSS 学习笔记（1）</a>
+      </h1>
+      <p class="meta"><time datetime="2014-05-08T11:00:00" pubdate>四 08 五月 2014</time></p>
+</header>
+
+  <div class="entry-content"><h3>开始了解HTML</h3>
+<blockquote>
+<p>你和Web之间的唯一障碍就是学习使用其中的语言</p>
+</blockquote>
+<p><code>HyperText Markup Language(超文本标记语言)</code>，简写为HTML。让我们先从宏观的角度看看HTML以及Web的工作原理
+<img alt="1" src="/images/html-1-1.png" /></p>
+<h3>Web服务器的工作</h3>
+<p>Web服务器主要是处理浏览器的各种请求，包括浏览网页，图片，播放声音，观看电影等。
+<img alt="2" src="/images/html-1-2.png" /></p>
+<h3>Web浏览器的工作</h3>
+<p>上网的过程中点击某个链接来浏览网页，你的点击会导致浏览器向Web服务器请求一个HTML网页，然后浏览器接收该网页，并在浏览器窗口中显示
+<img alt="3" src="/images/html-1-3.png" /></p>
+<h3>HTML例</h3>
+<p>下面来看一个简单的例子，HTML源码如下：
+<img alt="4" src="/images/html-1-4.png" /></p>
+<h3>浏览器创建了什么</h3>
+<p>当浏览器“阅读”HTML时，它会解析文本中所有的 <em>标签</em>，标签使用尖括号括起来的字母或者单词，例如<code>&lt;head&gt;</code>,<code>&lt;p&gt;</code>,<code>&lt;h1&gt;</code> 等等。标签告诉了浏览器文本的结构和意义。我们能通过HTML中的标签告诉浏览器哪些文本是<strong>标题</strong>，哪些文本是<strong>段乱</strong>，哪些需要<strong>强调</strong>，哪里需要放置<strong>图片</strong>。让我们来看看浏览器是怎么解析刚刚例子中的标签的
+<img alt="5" src="/images/html-1-5.png" /></p></div>
+  <footer>
+    <a rel="full-article" href="http://xiongxiaoxx.github.io/blog/2014/05/08/learn_html_1/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="http://xiongxiaoxx.github.io/blog/2014/04/15/ros_multiplemachines/">[ROS]ROS PC间通讯</a>
       </h1>
       <p class="meta"><time datetime="2014-04-15T17:00:00" pubdate>二 15 四月 2014</time></p>
@@ -149,28 +179,8 @@ rosdep install rgbdslam_freiburg
     <a rel="full-article" href="http://xiongxiaoxx.github.io/blog/2014/03/22/rgbd_slam/">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="http://xiongxiaoxx.github.io/blog/2014/03/20/slam/">[ROS]即时定位与地图构建(SLAM)的相关研究</a>
-      </h1>
-      <p class="meta"><time datetime="2014-03-20T20:00:00" pubdate>四 20 三月 2014</time></p>
-</header>
-
-  <div class="entry-content"><p>即时定位与地图构建（SimultaneousLocalization AndMapping）指的是机器人在自身位置不确定的条件下,在完全未知环境中创建地图,同时利用地图进行自主定位和导航。</p>
-<p>SLAM问题可以描述为:机器人在未知环境中从一个未知位置开始移动,在移动过程中根据位置估计和传感器数据进行自身定位,同时建造增量式地图。</p>
-<ul>
-<li>定位(localization)：机器人必须知道自己在环境中位置。</li>
-<li>建图(mapping)：机器人必须记录环境中特征的位置（如果知道自己的位置）</li>
-<li>SLAM：机器人在定位的同时建立环境地图。其基本原理是运过概率统计的方法，通过多特征匹配来达到定位和减少定位误差的。</li>
-</ul>
-<p><img alt="图 SLAM的基本过程" src="/images/slam_base.jpg" /></p>
-<p>移动机器人自定位与环境建模问题是紧密相关的。环境模型的准确性依赖于定位精度，而定位的实现又离不开环境模型。在未知环境中，机器人没有什么参照物，只能依靠自己并不十分准确的传感器来获取外界信息，如同一个盲人在一个陌生环境中摸索的情况。这种情况下，定位是比较困难的。有地图的定位和有定位的地图创建都是容易解决的，但无地图的定位和未解决定位的地图创建如同"鸡--蛋"问题，无从下手。已有的研究中对这类问题的解决方法可分为两类：一类利用自身携带的多种内部传感器(包括里程仪、罗盘、加速度计等)，通过多种传感信息的融合减少定位的误差，使用的融合算法多为基于卡尔曼滤波的方法。这类方法由于没有参考外部信息，在长时间的漫游后误差的积累会比较大。另一类方法在依靠内部传感器估计自身运动的同时，使用外部传感器(如激光测距仪、视觉等)感知环境，对获得的信息进行分析提取环境特征并保存 ...</p></div>
-  <footer>
-    <a rel="full-article" href="http://xiongxiaoxx.github.io/blog/2014/03/20/slam/">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
+    <a class="prev" href="http://xiongxiaoxx.github.io/author/xiong-xiao2.html">&larr; Older</a>
 
   <br />
 </div></div>
@@ -178,6 +188,9 @@ rosdep install rgbdslam_freiburg
   <section>
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
+      <li class="post">
+          <a href="http://xiongxiaoxx.github.io/blog/2014/05/08/learn_html_1/">[HTML] Head First HTML & CSS 学习笔记（1）</a>
+      </li>
       <li class="post">
           <a href="http://xiongxiaoxx.github.io/blog/2014/04/15/ros_multiplemachines/">[ROS]ROS PC间通讯</a>
       </li>
@@ -190,15 +203,13 @@ rosdep install rgbdslam_freiburg
       <li class="post">
           <a href="http://xiongxiaoxx.github.io/blog/2014/03/22/rgbd_slam/">[ROS]fuerte版本的下解决rgbdslam包不兼容的问题</a>
       </li>
-      <li class="post">
-          <a href="http://xiongxiaoxx.github.io/blog/2014/03/20/slam/">[ROS]即时定位与地图构建(SLAM)的相关研究</a>
-      </li>
     </ul>
   </section>
   <section>
       
     <h1>Categories</h1>
     <ul id="recent_posts">
+        <li><a href="http://xiongxiaoxx.github.io/category/html.html">HTML</a></li>
         <li><a href="http://xiongxiaoxx.github.io/category/python.html">Python</a></li>
         <li><a href="http://xiongxiaoxx.github.io/category/ros.html">ROS</a></li>
     </ul>
@@ -207,7 +218,7 @@ rosdep install rgbdslam_freiburg
 
   <section>
   <h1>Tags</h1>
-    <a href="http://xiongxiaoxx.github.io/tag/pelican.html">pelican</a>,    <a href="http://xiongxiaoxx.github.io/tag/rgbdslam.html">rgbdslam</a>,    <a href="http://xiongxiaoxx.github.io/tag/python.html">python</a>,    <a href="http://xiongxiaoxx.github.io/tag/multiplemachines.html">MultipleMachines</a>,    <a href="http://xiongxiaoxx.github.io/tag/kinect.html">kinect</a>,    <a href="http://xiongxiaoxx.github.io/tag/slam.html">slam</a>,    <a href="http://xiongxiaoxx.github.io/tag/ros.html">ROS</a>,    <a href="http://xiongxiaoxx.github.io/tag/3d.html">3D</a>  </section>
+    <a href="http://xiongxiaoxx.github.io/tag/pelican.html">pelican</a>,    <a href="http://xiongxiaoxx.github.io/tag/rgbdslam.html">rgbdslam</a>,    <a href="http://xiongxiaoxx.github.io/tag/python.html">python</a>,    <a href="http://xiongxiaoxx.github.io/tag/multiplemachines.html">MultipleMachines</a>,    <a href="http://xiongxiaoxx.github.io/tag/kinect.html">kinect</a>,    <a href="http://xiongxiaoxx.github.io/tag/html.html">HTML</a>,    <a href="http://xiongxiaoxx.github.io/tag/ros.html">ROS</a>,    <a href="http://xiongxiaoxx.github.io/tag/slam.html">slam</a>,    <a href="http://xiongxiaoxx.github.io/tag/css.html">CSS</a>,    <a href="http://xiongxiaoxx.github.io/tag/3d.html">3D</a>  </section>
 
 
     <section>
