@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>XiongXiao's Blog</title><link>http://xiongxiaoxx.github.io/</link><description>菜鸟要起飞</description><atom:link href="http://xiongxiaoxx.github.io//rss.xml" rel="self"></atom:link><lastBuildDate>Thu, 08 May 2014 11:00:00 +0800</lastBuildDate><item><title>[HTML] Head First HTML &amp; CSS 学习笔记（1）</title><link>http://xiongxiaoxx.github.io/blog/2014/05/08/learn_html_1/</link><description>&lt;h2&gt;开始了解HTML&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;你和Web之间的唯一障碍就是学习使用其中的语言&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;code&gt;HyperText Markup Language(超文本标记语言)&lt;/code&gt;，简写为HTML。让我们先从宏观的角度看看HTML以及Web的工作原理
+&lt;img alt="1" src="/images/html-1-1.png" /&gt;&lt;/p&gt;
+&lt;h3&gt;1.Web服务器的工作&lt;/h3&gt;
+&lt;p&gt;Web服务器主要是处理浏览器的各种请求，包括浏览网页，图片，播放声音，观看电影等。
+&lt;img alt="2" src="/images/html-1-2.png" /&gt;&lt;/p&gt;
+&lt;h3&gt;2.Web浏览器的工作&lt;/h3&gt;
+&lt;p&gt;上网的过程中点击某个链接来浏览网页，你的点击会导致浏览器向Web服务器请求一个HTML网页，然后浏览器接收该网页，并在浏览器窗口中显示
+&lt;img alt="3" src="/images/html-1-3.png" /&gt;&lt;/p&gt;
+&lt;h3&gt;3.HTML例&lt;/h3&gt;
+&lt;p&gt;下面来看一个简单的例子，HTML源码如下：
+&lt;img alt="4" src="/images/html-1-4.png" /&gt;&lt;/p&gt;
+&lt;h3&gt;4.浏览器创建了什么&lt;/h3&gt;
+&lt;p&gt;当浏览器“阅读”HTML时，它会解析文本中所有的 &lt;em&gt;标签&lt;/em&gt;，标签使用尖括号括起来的字母或者单词，例如&lt;code&gt;&amp;lt;head&amp;gt;&lt;/code&gt;,&lt;code&gt;&amp;lt;p&amp;gt;&lt;/code&gt;,&lt;code&gt;&amp;lt;h1&amp;gt;&lt;/code&gt; 等等。标签告诉了浏览器文本的结构和意义。我们能通过HTML中的标签告诉浏览器哪些文本是&lt;strong&gt;标题&lt;/strong&gt;，哪些文本是&lt;strong&gt;段乱&lt;/strong&gt;，哪些需要&lt;strong&gt;强调&lt;/strong&gt;，哪里需要放置&lt;strong&gt;图片&lt;/strong&gt;。让我们来看看浏览器是怎么解析刚刚例子中的标签的
+&lt;img alt="5" src="/images/html-1-5.png" /&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Xiong Xiao</dc:creator><pubDate>Thu, 08 May 2014 11:00:00 +0800</pubDate><guid>tag:xiongxiaoxx.github.io,2014-05-08:blog/2014/05/08/learn_html_1/</guid><category>HTML</category><category>CSS</category></item><item><title>[ROS]ROS PC间通讯</title><link>http://xiongxiaoxx.github.io/blog/2014/04/15/ros_multiplemachines/</link><description>&lt;p&gt;Kinect输出的数据包括640*480的rgb颜色数据以及depth深度数据，计划采用的实验平台是Xilinx提供的&lt;a href="http://www.digilentinc.com/Products/Detail.cfm?NavPath=2,400,1198&amp;amp;Prod=ZYBO"&gt;Zybo&lt;/a&gt;平台，由于Kinect的数据量大，加上3D建模的算法较为复杂，想要在Zybo平台上实现所有的功能恐怕是心有余而力不足,所以就需要在Zybo上做一些相对简单的处理，再将数据发送至PC端实现一些较为复杂的算法和图形显示功能。&lt;/p&gt;
+&lt;p&gt;由于Zybo上的ROS暂时还未实现，暂且先用两台PC做实验。&lt;/p&gt;
+&lt;p&gt;在多台机器上部署ROS并不复杂，记住以下几点&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;只能有一个主控制器&lt;code&gt;ROS master&lt;/code&gt;，选择一台机器运行&lt;/li&gt;
+&lt;li&gt;所有的机器必须配置为使用相同的主控制器，通过设置环境变量&lt;code&gt;ROS_MASTER_URI&lt;/code&gt;实现&lt;/li&gt;
+&lt;li&gt;所有的机器端口之间都必须有完整的双向连接&lt;/li&gt;
+&lt;li&gt;每台机器都必须要有一个自己的名字，其他的机器通过名字解析
+具体设置可以参考&lt;a href="http://wiki.ros.org/ROS/NetworkSetup"&gt;ROS/NetworkSetup&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;实验步骤&lt;/h2&gt;
+&lt;p&gt;这里的&lt;code&gt;MASTER_IP&lt;/code&gt;和&lt;code&gt;SLAVE_IP&lt;/code&gt;分别代表两台机器的IP地址,请自行更改&lt;/p&gt;
+&lt;p&gt;1.在主机运行&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;export &lt;/span&gt;&lt;span class="nv"&gt;ROS_MASTER_URI&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;http://MASTER_IP:11311
+&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;export &lt;/span&gt;&lt;span class="nv"&gt;ROS_IP&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;MASTER_IP
+&lt;span class="nv"&gt;$ &lt;/span&gt;roscore
+&lt;span class="nv"&gt;$ &lt;/span&gt;rosrun rospy_tutorials listener.py
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;2.在从机运行&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;export &lt;/span&gt;&lt;span class="nv"&gt;ROS_MASTER_URI&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;http://MASTER_IP:11311
+&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;export &lt;/span&gt;&lt;span class="nv"&gt;ROS_IP&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;SLAVE_IP
+&lt;span class="nv"&gt;$ &lt;/span&gt;rosrun rospy_tutorials talker.py
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;注意：在&lt;code&gt;bash&lt;/code&gt;中使用export只对当前终端有效，如果新开终端，需要重新设置，所以建议将&lt;code&gt;export ROS_MASTER_URI&lt;/code&gt; 和 &lt;code&gt;export ROS_IP&lt;/code&gt;直接写入～/.bash文件&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Xiong Xiao</dc:creator><pubDate>Tue, 15 Apr 2014 17:00:00 +0800</pubDate><guid>tag:xiongxiaoxx.github.io,2014-04-15:blog/2014/04/15/ros_multiplemachines/</guid><category>ROS</category><category>MultipleMachines</category></item><item><title>[ROS]Kinect 3D 环境建模的尝试与改造</title><link>http://xiongxiaoxx.github.io/blog/2014/04/01/kinect_3d/</link><description>&lt;p&gt;今年团队参加了&lt;a href="http://www.openhw.org/"&gt;openHW&lt;/a&gt; 2014开源硬件与嵌入式大赛。计划用四旋翼飞行器搭载kinect实现室内环境的三维建模。期望的最终实现下过如下图：
+&lt;img alt="3d_output" src="/images/3d_output.png" /&gt;&lt;/p&gt;
+&lt;p&gt;去年我们团队同样参加了这个比赛，题目是&lt;a href="http://www.openhw.org/project/index_view_2311.html"&gt;混合实时移动机器人平台&lt;/a&gt;，实现小型轮式移动机器人室内环境的2D地图构建和导航，采用ROS（Robot Operation System）分布式架构。演示视频在&lt;a href="http://v.youku.com/v_show/id_XNTc3MzkxODcy.html"&gt;这里&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;虽说已经有了去年的基础，但从2D升级到3D还是面临着很多挑战。具体体现在以下几个方面：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;数据量的大幅增加，网络传输的带宽限制&lt;/li&gt;
+&lt;li&gt;环境信息的特征识别、地图拼接的算法等都更加复杂&lt;/li&gt;
+&lt;li&gt;飞行器的飞行状态的不稳定性&lt;/li&gt;
+&lt;/ul&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Xiong Xiao</dc:creator><pubDate>Tue, 01 Apr 2014 17:00:00 +0800</pubDate><guid>tag:xiongxiaoxx.github.io,2014-04-01:blog/2014/04/01/kinect_3d/</guid><category>kinect</category><category>ROS</category><category>3D</category></item><item><title>[Pelican] 使用Pelican搭建静态博客</title><link>http://xiongxiaoxx.github.io/blog/2014/03/25/page1/</link><description>&lt;h2&gt;为什么写博客&lt;/h2&gt;
+&lt;p&gt;一方面是对自己平时工作和学习中收获的自我总结和积累，另一方面，借用知乎的一句话说就是“&lt;strong&gt;与世界分享你的知识&lt;/strong&gt;”。&lt;/p&gt;
+&lt;h2&gt;为什么选择&lt;a href="http://docs.getpelican.com/en/3.3.0/"&gt;Plican&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;写博客有两种选择:&lt;/p&gt;
+&lt;p&gt;一种是博客社区，中文的比如&lt;a href="http://blog.csdn.net/"&gt;CSDN&lt;/a&gt;，&lt;a href="https://www.cnblogs.com/"&gt;博客园&lt;/a&gt;等，我之前在CSDN上的博客在&lt;a href="http://blog.csdn.net/xiongxiaoxx"&gt;这里&lt;/a&gt;。社区中不乏很多好的文章，而且搜索起来比较方便。&lt;/p&gt;
+&lt;p&gt;第二种是搭建个人的独立博客。一直以来搭建独立Blog的首选只有 &lt;code&gt;Wordpress&lt;/code&gt; ，不但安装快捷简单，还有无数的插件和主题。我也学习过&lt;code&gt;Python&lt;/code&gt; 和&lt;code&gt;Django&lt;/code&gt;，尝试过用&lt;code&gt;Django&lt;/code&gt;自己搭建一个博客，感兴趣的可以看看&lt;a href="http://django-blog-zinnia.com/"&gt;django-blog-zinnia&lt;/a&gt;，但最终因为相对繁杂的配置和管理放弃了。请原谅我的孤陋寡闻，我是直到三个月前才知道&lt;a href="https://pages.github.com/"&gt;Github Pages&lt;/a&gt; 和静态博客这个概念的。&lt;/p&gt;
+&lt;h3&gt;静态Blog生成工具的好处：&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;静态，对托管空间没有要求，只要支持Web服务即可，可以直接放在Github上&lt;/li&gt;
+&lt;li&gt;支持 &lt;code&gt;reStructuredText&lt;/code&gt; 和 &lt;code&gt;Markdown&lt;/code&gt; 语法，这种所想即所得的标记语言加上 &lt;code&gt;Emacs&lt;/code&gt;的定制配置，写起来很顺手&lt;/li&gt;
+&lt;li&gt;管理，日志都是文本文件，可以用 &lt;code&gt;Git&lt;/code&gt; 方便的管理、进行版本控制。&lt;/li&gt;
+&lt;li&gt;内嵌代码支持，使用 &lt;code&gt;pygments&lt;/code&gt; 代码高亮&lt;/li&gt;
+&lt;li&gt;轻量级，美观，自定义性强，让你专注于内容等等其他优点就不多说了&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Github Pages 官方支持的是&lt;code&gt;Jekyll&lt;/code&gt;。看到很多使用Pelican的教程中都有这样一句话“之所以没有使用的Jekyll, 是因为它是Ruby编写, 而我又对Ruby没有啥兴趣, 所以还是选择了使用了我熟悉的Python编写的Pelican”。我自己也是一个Python爱好者，Ruby接触的很少，所以Python自然也是我的首选。&lt;/p&gt;
+&lt;h2&gt;安装&lt;/h2&gt;
+&lt;p&gt;建议在&lt;code&gt;virtualenv&lt;/code&gt;下使用，首先安装virtualenv:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;sudo pip install virtualenv
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;建立 virtualenv 环境&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;virtualenv pelican
+&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;cd &lt;/span&gt;pelican
+&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;source &lt;/span&gt;bin/activate
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;从 &lt;code&gt;Github&lt;/code&gt; 克隆最新代码安装 &lt;code&gt;Pelican&lt;/code&gt;&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;git clone git://github.com/getpelican/pelican.git
+&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;cd &lt;/span&gt;pelican
+&lt;span class="nv"&gt;$ &lt;/span&gt;python setup.py install
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;到此&lt;code&gt;Pelican&lt;/code&gt;就安装好了。&lt;/p&gt;
+&lt;h2&gt;新建Blog&lt;/h2&gt;
+&lt;p&gt;创建文件夹并新建Blog&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;mkdir myblog
+&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;cd &lt;/span&gt;myblog
+&lt;span class="nv"&gt;$ &lt;/span&gt;pelican-quickstart
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;回答一系列的问题之后会自动在当前目录生成以下文件&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;.
+|-- content              &lt;span class="c"&gt;# 所有的文章和图片都放在此目录&lt;/span&gt;
+|-- develop_server.sh    &lt;span class="c"&gt;# 用于开启测试服务器&lt;/span&gt;
+|-- Makefile             &lt;span class="c"&gt;# 方便管理博客的Makefile&lt;/span&gt;
+|-- output               &lt;span class="c"&gt;# 静态文件生成目录&lt;/span&gt;
+|-- pelicanconf.py       &lt;span class="c"&gt;# 配置文件&lt;/span&gt;
+|-- publishconf.py       &lt;span class="c"&gt;# 发布用的配置文件&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;新建文章&lt;/h2&gt;
+&lt;p&gt;在 content 目录下新建文件夹，文章便会自动归类到该文件夹名的分类中。&lt;/p&gt;
+&lt;p&gt;如果要建立页面（比如about页面），在 content 中新建文件夹 pages ，将文件放在该文件夹中即可。&lt;/p&gt;
+&lt;p&gt;以下用 Markdown 为例:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;Title: &lt;span class="o"&gt;[&lt;/span&gt;Pelican&lt;span class="o"&gt;]&lt;/span&gt; 使用Pelican搭建静态博客
+Date: 2014-03-25 22:20
+Category: Python
+Tags: pelican, python
+Slug: build-blog-with-pelican  &lt;span class="c"&gt;#指定生成页面的名称, 比如这个页面的最后生成的名称为build-blog-with-pelican.html&lt;/span&gt;
+Author: Xiong Xiao
+
+Blog具体内容...
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;生成Blog&lt;/h2&gt;
+&lt;p&gt;生成Blog非常简单，之需要运行&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;make html
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;即可在 output 目录下生成全站的页面。只需把 output 下的所有文件上传至Web服务器就可以访问了。&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Xiong Xiao</dc:creator><pubDate>Tue, 25 Mar 2014 22:20:00 +0800</pubDate><guid>tag:xiongxiaoxx.github.io,2014-03-25:blog/2014/03/25/page1/</guid><category>pelican</category><category>python</category></item><item><title>[ROS]fuerte版本的下解决rgbdslam包不兼容的问题</title><link>http://xiongxiaoxx.github.io/blog/2014/03/22/rgbd_slam/</link><description>&lt;p&gt;最近学习ROS的过程中入手了kinect，一些驱动部分已经装好，对人体的骨架识别在一番折腾之后也没有问题了，唯独在对环境进行地图建模的地方一直卡住很久，由于手上没有现成的机器人，本人也是ROS新手，所以只能按照官方的教程一步一步来，具体可以参考&lt;a href="http://www.ros.org/wiki/rgbdslam"&gt;rgbdslam Wiki&lt;/a&gt;。下载完rgbdslam_freiburg包，也通过&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;rosdep update
+rosdep install rgbdslam_freiburg
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;安装了libg2o,但在最终编译的时候出现错误，导致编译不能通过。上ROS ANWSERS 找解决办法，发现有很多和我类似的情况，最后我找到了&lt;a href="http://answers.ros.org/question/50585/rgbdslam-error-in-fuerte-and-electric/"&gt;这个&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;其中的回答大意就是删除libg2o包，下载旧版本的g2o包，然后更改rgbdslam_freiburg包编译过程中用到的依赖。&lt;/p&gt;
+&lt;p&gt;我的步骤如下&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;到&lt;a href="http://openslam.org/g2o.html"&gt;http://openslam.org/g2o.html&lt;/a&gt; 通过svn获取源码，阅读trunk文件夹中的README.TXT安装一些依赖之后再编译。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在&lt;a href="http://ros.org/wiki/g2o"&gt;http://ros.org/wiki/g2o&lt;/a&gt;通过svn下载包，然后编译，在编译过程中会提示网址的svn证书不受信任，编译终止。通过在网上查资料，更改g2o文件夹下的ＭakeFile中的SVN配置即可：
+&lt;code&gt;SVN_CMDLINE = svn --no-auth-cache --trust-server-cert --non-interactive --config-dir&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;更改之后重新编译，耗时较长，大概400s，请耐心等待。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;g2o包编译成功之后，按照别人给的回答修改rgbdslam_freiburg包编译过程中用到的依赖，再次编译rgbdslam_freiburg包，成功！&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Xiong Xiao</dc:creator><pubDate>Sat, 22 Mar 2014 20:00:00 +0800</pubDate><guid>tag:xiongxiaoxx.github.io,2014-03-22:blog/2014/03/22/rgbd_slam/</guid><category>kinect</category><category>ROS</category><category>3D</category><category>rgbdslam</category></item><item><title>[ROS]即时定位与地图构建(SLAM)的相关研究</title><link>http://xiongxiaoxx.github.io/blog/2014/03/20/slam/</link><description>&lt;p&gt;即时定位与地图构建（SimultaneousLocalization AndMapping）指的是机器人在自身位置不确定的条件下,在完全未知环境中创建地图,同时利用地图进行自主定位和导航。&lt;/p&gt;
+&lt;p&gt;SLAM问题可以描述为:机器人在未知环境中从一个未知位置开始移动,在移动过程中根据位置估计和传感器数据进行自身定位,同时建造增量式地图。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;定位(localization)：机器人必须知道自己在环境中位置。&lt;/li&gt;
+&lt;li&gt;建图(mapping)：机器人必须记录环境中特征的位置（如果知道自己的位置）&lt;/li&gt;
+&lt;li&gt;SLAM：机器人在定位的同时建立环境地图。其基本原理是运过概率统计的方法，通过多特征匹配来达到定位和减少定位误差的。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img alt="图 SLAM的基本过程" src="/images/slam_base.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;移动机器人自定位与环境建模问题是紧密相关的。环境模型的准确性依赖于定位精度，而定位的实现又离不开环境模型。在未知环境中，机器人没有什么参照物，只能依靠自己并不十分准确的传感器来获取外界信息，如同一个盲人在一个陌生环境中摸索的情况。这种情况下，定位是比较困难的。有地图的定位和有定位的地图创建都是容易解决的，但无地图的定位和未解决定位的地图创建如同"鸡--蛋"问题，无从下手。已有的研究中对这类问题的解决方法可分为两类：一类利用自身携带的多种内部传感器(包括里程仪、罗盘、加速度计等)，通过多种传感信息的融合减少定位的误差，使用的融合算法多为基于卡尔曼滤波的方法。这类方法由于没有参考外部信息，在长时间的漫游后误差的积累会比较大。另一类方法在依靠内部传感器估计自身运动的同时，使用外部传感器(如激光测距仪、视觉等)感知环境，对获得的信息进行分析提取环境特征并保存，在下一步通过对环境特征的比较对自身位置进行校正。但这种方法依赖于能够取得环境特征&lt;/p&gt;
+&lt;h3&gt;SLAM的三个基本问题&lt;/h3&gt;
+&lt;p&gt;Leonard和 Durrant-Whyte将移动机器人完成任务定义为三个问题“Wheream I?”、“Wheream I going?”和“Howdo I getthere”，就是定位、目标识别和路径规划，为了能实现导航，移动机器人需要靠本体感受传感器和环境感知传感器来实现对本体位姿估计和外部环境位姿的定位。依据环境空间的描述方法，Desouza等将视觉导航的方法化为三类：
+(1)已知地图的导航(Map-BasedNavigation)：表示地图的方法几何特征(GeometricPrimitives)、拓扑特征(TopologicalFeatures)或占据栅格(OccupancyGrids)移动机器人依据这些已知的环境地图进行导航。
+(2)地图建立的导航(Map-Building-BasedNavigation)：在没有已知环境地图的情况下，移动机器人通过自身的导航运动和传感器的不断感知更新来进行导航。
+(3)未知环境的导航(MaplessNavigation)：相对于上面两种方法，在实时的动态环境中无法建立明确的地图表达形式，更多的是通过传感器获得的观测信息用来识别或者跟踪环境中的物体来导航。
+但是由于感知信息的不确定性，移动机器人很难实现定位的准确，因而，在未知环境中的定位成为最关键的问题
+定位(Wheream I?)是实现自主能力的最基本问题，是为了确定机器人在运行环境中相对于世界坐标系的位置及其本身的位姿。
+移动机器人的定位与其它领域研究课题的关系如图所示：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="图 SLAM与各领域关系图" src="/images/slam_relation.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;现有的移动机器人自主定位方法主要是局部定位和全局定位。局部是通过测量相对于机器人初始位姿的距离和方向来确定当前的位姿，但随着时间的累计造成定位的误差较大，无法精确定位。全局定位则通过测机器人的绝对位置来定位，定位的精度较高，并且可以用来修正局部定位的定位误差。
+现在移动机器人定位的方法大致可分为三类:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;相对定位(RelativePositionMeasurements)：主要依靠内部本体感受传感器如里程计（Odometry）、陀螺仪(Gyroscopes)等，通过给定初始位姿，来测量相对于机器人初始位姿的距离和方向来确定当前机器人的位姿，也叫做航迹推测(DeadReckoning, DR)。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;绝对定位(AbsolutePosition Measurements)：主要采用主动或被动标识(Activeor Passive Beacons)、地图匹配(MapMatching)、全球定位系统(GlobalPositioning System,GPS)、或导航信标(LandmarkNavigation)进行定位。位置的计算方法包括有三角测量法(Triangulation)、三边测量法(Trilateration)和模型匹配算法(ModelMatching)等。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;组合定位(CombinedPositionMethod)：虽然相对定位这种方法能够根据运动学模型的自我推算移动机器人的位姿和轨迹而且具有自包含的有点。但是不可避免地会存在随时间的增加和距离的增加而增加的累积航迹误差。在绝对定位中，地图匹配技术处理数据速度较慢，而信标或标识牌的建设和维护成本太高，GPS又只能在室外使用。由于单一定位的方法的缺陷，移动机器人定位仍然是基于航迹的推算与绝对位姿和轨迹矫正相结合起来。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Xiong Xiao</dc:creator><pubDate>Thu, 20 Mar 2014 20:00:00 +0800</pubDate><guid>tag:xiongxiaoxx.github.io,2014-03-20:blog/2014/03/20/slam/</guid><category>ROS</category><category>slam</category></item></channel></rss>
